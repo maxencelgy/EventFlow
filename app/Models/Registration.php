@@ -99,16 +99,20 @@ class Registration extends Model
             ->first();
 
         if ($first) {
+            $oldPosition = $first->waiting_position;
+            
             $first->update([
                 'status' => 'inscrit',
                 'waiting_position' => null,
             ]);
 
             // Reorder remaining waitlist
-            static::where('event_id', $this->event_id)
-                ->where('status', 'liste_attente')
-                ->where('waiting_position', '>', $first->waiting_position)
-                ->decrement('waiting_position');
+            if ($oldPosition) {
+                static::where('event_id', $this->event_id)
+                    ->where('status', 'liste_attente')
+                    ->where('waiting_position', '>', $oldPosition)
+                    ->decrement('waiting_position');
+            }
         }
     }
 
