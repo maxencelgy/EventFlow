@@ -1,0 +1,20 @@
+{
+  "admin": {
+    "email": "admin@eventflow.test",
+    "password": "password"
+  },
+  "chef_projet": {
+    "email": "chef@eventflow.test",
+    "password": "password"
+  },
+  "accueil": {
+    "email": "accueil@eventflow.test",
+    "password": "password"
+  },
+  "event": {
+    "title": "Conférence Test Cypress",
+    "description": "Test automatisé E2E",
+    "location": "Salle de test",
+    "max_participants": 50
+  }
+}
