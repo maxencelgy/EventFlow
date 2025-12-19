@@ -1,0 +1,68 @@
+Table users {
+  id int [pk]
+  name varchar
+  email varchar
+  password varchar
+  role enum
+}
+
+Table events {
+  id int [pk]
+  user_id int [ref: > users.id]
+  title varchar
+  description text
+  date date
+  start_time time
+  end_time time
+  location varchar
+  max_participants int
+  status enum
+  registration_token varchar
+  registration_open boolean
+}
+
+Table participants {
+  id int [pk]
+  first_name varchar
+  last_name varchar
+  email varchar [unique]
+  phone varchar
+  organization varchar
+  function varchar
+}
+
+Table registrations {
+  id int [pk]
+  event_id int [ref: > events.id]
+  participant_id int [ref: > participants.id]
+  status enum
+  registered_at datetime
+  checked_in_at datetime
+  waiting_position int
+}
+
+Table rooms {
+  id int [pk]
+  name varchar
+  capacity int
+  location varchar
+  description text
+}
+
+Table event_sessions {
+  id int [pk]
+  event_id int [ref: > events.id]
+  room_id int [ref: > rooms.id]
+  title varchar
+  description text
+  start_time time
+  end_time time
+  max_participants int
+}
+
+Table session_registrations {
+  id int [pk]
+  registration_id int [ref: > registrations.id]
+  event_session_id int [ref: > event_sessions.id]
+  status enum
+}
